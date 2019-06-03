@@ -11,25 +11,72 @@
 namespace ls{
 
     template < typename T >
-    class List{
+
+    class list{
+
+        private:
+
+            /** Contains nodes previous/next adresses, and it's data. */
+            struct Node {
+                T data;
+                Node *prev;
+                Node *next;
+                Node( const T & d = T(), Node *p = nullptr, Node *n = nullptr ):
+                    data(d), prev(p), next(n){}
+            };
+
+            std::size_t SIZE;           //!< Total size of the list
+            Node *m_head;               //!< Head node of the list
+            Node *m_tail; 
 
         public:
 
-        class iterator{
+
+
+        using size_type = unsigned long;
+
+        /*class iterator{
 
         };
 
 
         class const_iterator{
 
-        };
-
-        using size_type = unsigned long;
+        };*/
 
         ///Special Members
 
-        list();
+        list():               
+                SIZE { 0 },              
+                m_head { new Node() },
+                m_tail { new Node() }
+                
+        {/* Initialize the vector with null values */
+                this->m_head->prev = m_tail;
+                this->m_tail->next = m_head;
+                std::cout << "contruiu 1\n";
+        }
 
+        ~list()//não ta funcionando
+        {
+            Node *aux = this->m_head;
+            while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
+                aux = aux->next;
+
+                std::cout << "lo\n";
+
+                if( aux->prev != this->m_head ){//procedimento para impedir de deletar o head nesse momento
+                    delete aux->prev;
+                }
+
+            }
+            std::cout << "2lo\n";
+            delete this->m_head;//vai deletar o nodes finais de head e tail
+            delete this->m_tail;
+            std::cout << "3lo\n";
+        }
+
+        /*
         explicit list();
 
         template < typename InputIt >
@@ -38,8 +85,6 @@ namespace ls{
         list(const list& other);
 
         list ( std::initializer_list<T> ilist);
-
-        ~list();
 
         list& operator=( const list& other );
 
@@ -81,7 +126,7 @@ namespace ls{
         template< typename InItr >
         iterator insert( iterator pos, InItr first, InItr last );
 
-        
+        */
 
 
 
