@@ -164,7 +164,7 @@ namespace sc{
                 std::cout << "Construiu 1\n";
                 
                 if(this->m_head->next == m_tail){
-                    std::cout<< "deu certo\n";
+                    //std::cout<< "deu certo\n";
                 }
         }
 
@@ -225,6 +225,7 @@ namespace sc{
 
             Node * aux = this->m_head;
 
+
             for( size_type i = 0; i < SIZE; i++){
 
                 Node * new_n = new Node();
@@ -268,34 +269,35 @@ namespace sc{
             this->m_tail->prev = m_head;
 
             Node * aux = this->m_head;
-            Node * aux2 = m_head;
+            Node * aux2 = other.m_head;
 
-            std::cout << aux2->data <<"\n\n";
-            aux2 = aux2->next;
-            std::cout << aux2->data <<"\n\n";
+            //std::cout << aux2->data <<"\n\n";
+            //aux2 = aux2->next;
+            //std::cout << aux2->data <<"\n\n";
 
-            std::cout << "\n"<<m_head->next<<"\n";
+            //std::cout << "\n"<<m_head->next<<"\n";
             for(size_type i = 0; i < SIZE; i++ ){
 
-                std::cout << aux2->data <<"\n\n";
+                //std::cout << aux2->data <<"\n\n";
 
                 Node *new_n = new Node();
-                std::cout << "Construiu 42\n";
+                //std::cout << "Construiu 42\n";
                 aux2 = aux2->next;//ponteiro percorrendo
-                std::cout << aux2->data <<"\n\n";
+                //std::cout << aux2->data <<"\n\n";
                 aux->next = new_n;
                 new_n->prev = aux;
                 new_n->next = m_tail;
                 this->m_tail->prev = new_n;
-                std::cout << "Construiu 41\n";
+                //std::cout << "Construiu 41\n";
                 new_n->data = aux2->data;//atribuindo os valores
+                aux = aux->next;//avançando para o proximo nó
             }
 
             std::cout << "Construiu 4\n";
 
         }
         
-       /* list ( std::initializer_list<T> ilist):
+        list ( std::initializer_list<T> ilist):
             SIZE{ ilist.size() },
             m_head { new Node() },
             m_tail { new Node() } 
@@ -310,19 +312,20 @@ namespace sc{
             for( auto i(0u); i < ilist.size(); i++){
 
                 Node * new_n = new Node();
+
                 aux->next = new_n;
-                new_n->prev = ant;
+                new_n->prev = aux;
                 new_n->next = m_tail;
                 this->m_tail->prev = new_n;
 
-                ant = ant->next;
+                aux = aux->next;
 
-                new_n->data = (*ilist.begin()++i); 
+                new_n->data = (*ilist.begin() + i); 
             }
 
             std::cout <<"Construiu 5\n";
 
-        }/*
+        }
         /*
         list& operator=( const list& other ):
             SIZE{ other.SIZE },
@@ -371,8 +374,10 @@ namespace sc{
         {
 
             //Lista vazia;
+
+            Node * val = new Node();
             if(m_head->next == m_tail){
-                Node * val = new Node();
+                
                 val->prev = m_head;
                 m_head->next = val;
                 val->next = m_tail;
@@ -381,7 +386,7 @@ namespace sc{
             }
             else{
                 Node * aux = m_head->next;
-                Node * val = new Node();
+                
 
                 val->prev = m_head;
                 val->next = aux;
@@ -399,8 +404,9 @@ namespace sc{
         void push_back( const T & value )
         {
             //Lista vazia;
+            Node * val = new Node();
             if( m_tail->prev == m_head ){
-                Node * val = new Node();
+                //Node * val = new Node();
                 val->prev = m_head;
                 m_head->next = val;
                 val->next = m_tail;
@@ -409,7 +415,7 @@ namespace sc{
             }
             else{
                 Node * aux = m_tail->prev;
-                Node * val = new Node();
+                //Node * val = new Node();
 
                 val->prev = aux;
                 aux->next = val;
@@ -427,7 +433,7 @@ namespace sc{
             if(m_tail->prev == m_head) return;
 
             else{
-                Node * aux = 
+                //Node * aux = 
             }
 
         }

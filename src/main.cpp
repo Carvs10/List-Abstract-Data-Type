@@ -13,6 +13,8 @@ int main(){
 	std::vector<int> vec{1, 2, 3, 4, 5};
 	sc::list<int> lista1( std::begin(vec), std::end(vec) ); //3
 	sc::list<int> lista2(lista1);//4
+	std::array<int, 5> list{1, 2, 3, 4, 5};
+	//sc::list<int> lista3(list);
 
   
 
