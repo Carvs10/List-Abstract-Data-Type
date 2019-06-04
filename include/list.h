@@ -36,13 +36,12 @@ namespace ls{
 
         using size_type = unsigned long;
         ///Classe precia de ajustes, não esta completa;
-        class const_iterator{
+        /*class const_iterator{
 
             public:
                 ///Iterator Constructor
-                const_iterator( Node * curr):
-                    {}
-                {/*empty*/}
+               
+
 
                 const Object & operator*( void ) const
                 {
@@ -87,10 +86,10 @@ namespace ls{
                 Node *current;
                 const_iterator(Node *p) : current( p );
                 friend class List<Object>;
-        };
+        };*/
 
 
-        };
+        
 
         /*
         class const_iterator{
@@ -185,14 +184,16 @@ namespace ls{
                 new_n->data = *first;
 
                 first++;
-                std::cout << new_n->data;
+                std::cout << new_n->data <<std::endl;
+                std::cout << new_n->prev->data <<std::endl;
             }
 
             std::cout << "Construiu 3\n";
+            //std::cout << this->m_head;
         }
 
         
-        list( const list& other )
+        list( const list& other ):
             SIZE{ other.SIZE },
             CAPACITY{ other.CAPACITY },
             m_head { new Node() },
@@ -204,17 +205,28 @@ namespace ls{
             this->m_head->next = m_tail;
             this->m_tail->prev = m_head;
 
-            Node * aux = m_head;
+            Node * aux = this->m_head;
+            Node * aux2 = m_head;
 
+            std::cout << aux2->data <<"\n\n";
+            aux2 = aux2->next;
+            std::cout << aux2->data <<"\n\n";
+
+            std::cout << "\n"<<m_head->next<<"\n";
             for(size_type i = 0; i < CAPACITY; i++ ){
 
+                std::cout << aux2->data <<"\n\n";
+
                 Node *new_n = new Node();
+                std::cout << "Construiu 42\n";
+                aux2 = aux2->next;//ponteiro percorrendo
+                std::cout << aux2->data <<"\n\n";
                 aux->next = new_n;
                 new_n->prev = aux;
                 new_n->next = m_tail;
                 this->m_tail->prev = new_n;
-
-                new_n->data = 
+                std::cout << "Construiu 41\n";
+                new_n->data = aux2->data;//atribuindo os valores
             }
 
             std::cout << "Construiu 4\n";
