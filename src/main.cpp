@@ -7,12 +7,12 @@
 
 int main(){
 
-	ls::list<int> vazio;//1
+	sc::list<int> vazio;//1
 	//std::cout << "pega!\n";
-	ls::list<int> vazio2(2); //2
-	std::vector<int> vec{1, 2, 3, 4, 5};
-	ls::list<int> lista1( std::begin(vec), std::end(vec) ); //3
-	ls::list<int> lista2(lista1);
+	sc::list<int> vazio2(2); //2
+	sc::vector<int> vec{1, 2, 3, 4, 5};
+	sc::list<int> lista1( std::begin(vec), std::end(vec) ); //3
+	sc::list<int> lista2(lista1);
 
   
 

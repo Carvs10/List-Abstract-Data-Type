@@ -8,7 +8,7 @@
 #include <exception>
 #include <algorithm> //std::copy
 
-namespace ls{
+namespace sc{
 
     template < typename T >
 
@@ -36,65 +36,117 @@ namespace ls{
 
         using size_type = unsigned long;
         ///Classe precia de ajustes, não esta completa;
-        /*class const_iterator{
+        class const_iterator{
 
             public:
                 ///Iterator Constructor
-               
+                const_iterator( const Node * it = nullptr):
+                {/*empty*/}
 
 
-                const Object & operator*( void ) const
+                const it & operator*( void ) const
                 {
-
+                    return *it;
                 }
 
                 const_iterator & operator++( void )
-                {
-                    return this-> current->next;
+                {   
+                    it= it->next;
+                    return this-> it->next;
                 }
 
                 const_iterator operator++( int )
                 {
-                    Node * iterator temp( current );
-                    current = current-> next;
+                    const_iterator temp( it );
+                    it = it-> next;
 
                     return temp;
                 }
 
                 const_iterator & operator--( void )
                 {
-                    return this-> current->prev;
+                    it = it->prev;
+                    return this-> it->prev;
                 }
 
                 const_iterator operator--( int )
                 {
-                    Node * iterator temp( current );
-                    current = current->prev;
+                    const_iterator temp( it );
+                    it = it->next
 
                     return temp;
                 }
 
                 ///Comparsion ==
-                bool operator==( const const_iterator & rhs ) const
-                {return this-> current == it.current;}
+                const bool operator==( const const_iterator & rhs ) const
+                {return this-> it == rhs.itit;}
 
                 ///Comparsion !=
-                bool operator!=( const const_iterator & rhs ) const
-                {return this-> current != it.current;}
+                const bool operator!=( const const_iterator & rhs ) const
+                {return this-> it != rhs.it;}
 
             private:
-                Node *current;
-                const_iterator(Node *p) : current( p );
-                friend class List<Object>;
-        };*/
+                const Node *it;
+                
+        };
 
 
         
 
-        /*
-        class const_iterator{
+        
+        class iterator{
 
-        };*/
+            public:
+                ///Iterator Constructor
+                iterator( Node * it = nullptr):
+                {/*empty*/}
+
+
+                iterator & operator*( void ) const
+                {
+                    return *it;
+                }
+
+                iterator & operator++( void )
+                {   
+                    it= it->next;
+                    return this-> it->next;
+                }
+
+                iterator operator++( int )
+                {
+                    iterator temp( it );
+                    it = it-> next;
+
+                    return temp;
+                }
+
+                iterator & operator--( void )
+                {
+                    it = it->prev;
+                    return this-> it->prev;
+                }
+
+                iterator operator--( int )
+                {
+                    iterator temp( it );
+                    it = it->next
+
+                    return temp;
+                }
+
+                ///Comparsion ==
+                bool operator==( const iterator & rhs ) const
+                {return this-> it == rhs.itit;}
+
+                ///Comparsion !=
+                bool operator!=( const iterator & rhs ) const
+                {return this-> it != rhs.it;}
+
+            private:
+                Node *it;
+
+        };
 
         ///Special Members
 
@@ -232,9 +284,37 @@ namespace ls{
             std::cout << "Construiu 4\n";
 
         }
-        /*
-        list ( std::initializer_list<T> ilist);
+        
+        list ( std::initializer_list<T> ilist):
+            SIZE{ ilist.size() },
+            CAPACITY{ ilist.size() },
+            m_head { new Node() },
+            m_tail { new Node() } 
+        {
+            this->m_head->prev = nullptr;
+            this->m_tail->next = nullptr;
+            this->m_head->next = m_tail;
+            this->m_tail->prev = m_head;
 
+            Node * aux = m_head;
+
+            for( auto i(0u); i < ilist.size(); i++){
+
+                Node * new_n = new Node();
+                aux->next = new_n;
+                new_n->prev = ant;
+                new_n->next = m_tail;
+                this->m_tail->prev = new_n;
+
+                ant = ant->next;
+
+                new_n->data = (*ilist.begin()++i); 
+            }
+
+            std::cout <<"Construiu 5\n";
+
+        }
+        /*
         list& operator=( const list& other );
 
         list& operator=( std::initializer_list<T> ilist);
