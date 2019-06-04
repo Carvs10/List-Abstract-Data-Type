@@ -152,8 +152,7 @@ namespace sc{
 
         ///Default Constructor
         list():               
-                SIZE { 0 },
-                CAPACITY{ 0 },              
+                SIZE { 0 },              
                 m_head { new Node() },
                 m_tail { new Node() }
                 
@@ -175,6 +174,7 @@ namespace sc{
             Node *aux = this->m_head->next;
             while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
                 aux = aux->next;
+                delete aux->prev;
 
             }
             
@@ -185,8 +185,7 @@ namespace sc{
 
         /// Construct the list with count default-inserted instances of T
         explicit list( size_type count ):
-                SIZE{ 0 },
-                CAPACITY{ count },
+                SIZE{ count },
                 m_head { new Node() },
                 m_tail { new Node() }
 
@@ -204,6 +203,8 @@ namespace sc{
                 new_T->next = m_tail;
                 this->m_tail->prev = new_T;
 
+                new_T->data = 0;
+
                 ant = ant->next;
                 
             }
@@ -214,7 +215,6 @@ namespace sc{
         template < typename InputIt >
         list( InputIt first, InputIt last ):
             SIZE{ (size_type)(last - first)},
-            CAPACITY{ (size_type)(last - first)},
             m_head { new Node() },
             m_tail { new Node() }
         {
@@ -225,7 +225,7 @@ namespace sc{
 
             Node * aux = m_head;
 
-            for( size_type i = 0; i < CAPACITY; i++){
+            for( size_type i = 0; i < SIZE; i++){
 
                 Node * new_n = new Node();
                 aux->next = new_n;
@@ -247,7 +247,6 @@ namespace sc{
         
         list( const list& other ):
             SIZE{ other.SIZE },
-            CAPACITY{ other.CAPACITY },
             m_head { new Node() },
             m_tail { new Node() }
         {
@@ -265,7 +264,7 @@ namespace sc{
             std::cout << aux2->data <<"\n\n";
 
             std::cout << "\n"<<m_head->next<<"\n";
-            for(size_type i = 0; i < CAPACITY; i++ ){
+            for(size_type i = 0; i < SIZE; i++ ){
 
                 std::cout << aux2->data <<"\n\n";
 
@@ -287,7 +286,6 @@ namespace sc{
         
         list ( std::initializer_list<T> ilist):
             SIZE{ ilist.size() },
-            CAPACITY{ ilist.size() },
             m_head { new Node() },
             m_tail { new Node() } 
         {
@@ -315,19 +313,45 @@ namespace sc{
 
         }
         /*
-        list& operator=( const list& other );
+        list& operator=( const list& other ):
+            SIZE{ other.SIZE },
+            CAPACITY{ other.CAPACITY }
+        {
+            
+        }
 
+        
         list& operator=( std::initializer_list<T> ilist);
+        */
 
         ///Operators
 
-        size_type size() const;
+        size_type size() const
+        {
+            return SIZE;
+        }
 
-        void clear();
+        void clear(){
 
-        bool empty();
+            Node *aux = this->m_head->next;
+            while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
+                aux = aux->next;
+                delete aux->prev;
+            }
+        };
 
-        void push_front( const T & value);
+        
+        bool empty(){
+            
+            if( m_head->next == m_tail ){
+                return true;
+            }
+            else{
+                return false;
+            } 
+        }
+        /*
+        void push_front( const T & value );
 
         void push_back( const T & value );
 
