@@ -343,11 +343,16 @@ namespace sc{
         }
 
         void clear(){
+            
+            //Lista Vazia;
+            if( m_head->next == m_tail) return;
 
-            Node *aux = this->m_head->next;
-            while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
-                aux = aux->next;
-                delete aux->prev;
+            else{
+                Node *aux = this->m_head->next;
+                while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
+                    aux = aux->next;
+                    delete aux->prev;
+                }
             }
         };
 
@@ -361,15 +366,82 @@ namespace sc{
                 return false;
             } 
         }
+        
+        void push_front( const T & value )
+        {
+
+            //Lista vazia;
+            if(m_head->next == m_tail){
+                Node * val = new Node();
+                val->prev = m_head;
+                m_head->next = val;
+                val->next = m_tail;
+                m_tail->prev = val;
+
+            }
+            else{
+                Node * aux = m_head->next;
+                Node * val = new Node();
+
+                val->prev = m_head;
+                val->next = aux;
+                aux->next = val;
+                m_head->next = val;
+            
+                
+            }
+
+            val->data =  value;
+
+        }
+
+        
+        void push_back( const T & value )
+        {
+            //Lista vazia;
+            if( m_tail->prev == m_head ){
+                Node * val = new Node();
+                val->prev = m_head;
+                m_head->next = val;
+                val->next = m_tail;
+                m_tail->prev = val;
+
+            }
+            else{
+                Node * aux = m_tail->prev;
+                Node * val = new Node();
+
+                val->prev = aux;
+                aux->next = val;
+                val->next = m_tail;
+                m_tail->prev = val;
+
+                
+            }
+
+            val->data = value;
+        }
+        
+        void pop_back()
+        {
+            if(m_tail->prev == m_head) return;
+
+            else{
+                Node * aux = 
+            }
+
+        }
+        
+        void pop_front()
+        {
+            if(m_head->next == m_tail) return;
+
+            else{
+                
+            }
+
+        }
         /*
-        void push_front( const T & value );
-
-        void push_back( const T & value );
-
-        void pop_back();
-
-        void pop_front();
-
         const T & back() const ;
 
         const T & front() const ;
