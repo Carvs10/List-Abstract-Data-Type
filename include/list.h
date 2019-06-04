@@ -40,11 +40,11 @@ namespace sc{
 
             public:
                 ///Iterator Constructor
-                const_iterator( const Node * it = nullptr):
+                const_iterator( const Node * it = nullptr)
                 {/*empty*/}
 
 
-                const it & operator*( void ) const
+                const_iterator & operator*( void ) const
                 {
                     return *it;
                 }
@@ -72,7 +72,7 @@ namespace sc{
                 const_iterator operator--( int )
                 {
                     const_iterator temp( it );
-                    it = it->next
+                    it = it->next;
 
                     return temp;
                 }
@@ -98,7 +98,7 @@ namespace sc{
 
             public:
                 ///Iterator Constructor
-                iterator( Node * it = nullptr):
+                iterator( Node * it = nullptr)
                 {/*empty*/}
 
 
@@ -130,7 +130,7 @@ namespace sc{
                 iterator operator--( int )
                 {
                     iterator temp( it );
-                    it = it->next
+                    it = it->next;
 
                     return temp;
                 }
@@ -223,21 +223,32 @@ namespace sc{
             this->m_head->next = m_tail;
             this->m_tail->prev = m_head;
 
-            Node * aux = m_head;
+            Node * aux = this->m_head;
 
             for( size_type i = 0; i < SIZE; i++){
 
                 Node * new_n = new Node();
-                aux->next = new_n;
-                new_n->prev = aux;
-                new_n->next = m_tail;
-                this->m_tail->prev = new_n;
 
                 new_n->data = *first;
 
+                aux->next = new_n;
+                new_n->prev = aux;
+                new_n->next = this->m_tail;
+                this->m_tail->prev = new_n;
+                aux = aux->next;
+
+                
+
                 first++;
-                std::cout << new_n->data <<std::endl;
-                std::cout << new_n->prev->data <<std::endl;
+                //std::cout << new_n->data <<std::endl;
+               // std::cout << new_n->prev->data <<std::endl;
+            }
+            Node * aux2 = this->m_head;
+            for( size_type i = 0; i < SIZE; i++){
+
+                aux2 = aux2->next;
+                //std::cout  <<std::endl;
+                //std::cout << aux2->prev->data <<std::endl;
             }
 
             std::cout << "Construiu 3\n";
@@ -284,7 +295,7 @@ namespace sc{
 
         }
         
-        list ( std::initializer_list<T> ilist):
+       /* list ( std::initializer_list<T> ilist):
             SIZE{ ilist.size() },
             m_head { new Node() },
             m_tail { new Node() } 
@@ -311,7 +322,7 @@ namespace sc{
 
             std::cout <<"Construiu 5\n";
 
-        }
+        }/*
         /*
         list& operator=( const list& other ):
             SIZE{ other.SIZE },
