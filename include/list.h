@@ -372,7 +372,7 @@ namespace sc{
         
         void push_front( const T & value )
         {
-
+            SIZE = SIZE + 1;
             //Lista vazia;
 
             Node * val = new Node();
@@ -390,7 +390,7 @@ namespace sc{
 
                 val->prev = m_head;
                 val->next = aux;
-                aux->next = val;
+                aux->prev = val;
                 m_head->next = val;
             
                 
@@ -402,7 +402,8 @@ namespace sc{
 
         
         void push_back( const T & value )
-        {
+        {   
+            SIZE = SIZE + 1;
             //Lista vazia;
             Node * val = new Node();
             if( m_tail->prev == m_head ){
@@ -430,10 +431,17 @@ namespace sc{
         
         void pop_back()
         {
+            SIZE = SIZE - 1;
+
             if(m_tail->prev == m_head) return;
 
             else{
-                //Node * aux = 
+                Node * aux = this->m_tail->prev;
+
+                aux = aux->prev;
+
+
+
             }
 
         }
@@ -447,11 +455,22 @@ namespace sc{
             }
 
         }
+        
+        const T & back() const 
+        {
+            Node * aux = this->m_tail->prev;
+            return aux->data;
+
+        }
+
+        const T & front() const 
+        {
+            Node * aux = this->m_head->next;
+            return aux->data;
+
+        }
+
         /*
-        const T & back() const ;
-
-        const T & front() const ;
-
         void assign( const T & value );
 
 
