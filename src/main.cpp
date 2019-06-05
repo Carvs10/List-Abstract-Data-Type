@@ -8,7 +8,6 @@
 int main(){
 
 	sc::list<int> vazio;//1
-	//std::cout << "pega!\n";
 	sc::list<int> vazio2(2); //2
 	std::vector<int> vec{1, 2, 3, 4, 5};
 	sc::list<int> lista1( std::begin(vec), std::end(vec) ); //3
@@ -23,6 +22,7 @@ int main(){
 	std::cout << "Size: " <<lista1.size() << std::endl;//size()
 
 	std::cout << "Back: " <<lista1.back() << std::endl;//back()
+	
 	std::cout << "Front: " <<lista1.front() << std::endl;//front()
 
 	lista1.push_back(6);
@@ -37,20 +37,19 @@ int main(){
 	lista1.pop_front();
 	std::cout << "Pop_front: " <<lista1.front() << std::endl;//pop_front()
 
-	//lista1.pop_front();
-
 	bool f = lista1==lista2;
 	std::cout << "bool lista1 == lista2: " << f << std::endl;//oparator ==()
 
 	bool a = lista1!=lista2;
 	std::cout << "bool lista1 != lista2: " << a << std::endl;//oparator ==()
 
-	//ITERATOR
+	//ITERATOR (not done)
 	//std::cout << "\n===============ITERATOR OPERATORS TEST==================\n\n";
 
 	sc::list<int>::iterator i; //pop_front()
 	i = lista1.begin();
   	//std::cout << "it" << *i << std::endl;
+	std::cout << "\n===============================================\n\n";
 
 	return 0;
 }
