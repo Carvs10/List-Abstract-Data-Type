@@ -509,7 +509,19 @@ namespace sc{
         template< typename InItr >
         iterator insert( iterator pos, InItr first, InItr last );
 
-        
+        iterator erase( iterator pos ){
+
+            iterator returner = pos.it->next;
+
+            (pos.it->next)->prev = pos.it->prev;
+            (pos.it->prev)->next = pos.it->next;
+
+            delete pos.it;
+
+            SIZE-= 1;
+
+            return returner;
+        }
 
 
 
