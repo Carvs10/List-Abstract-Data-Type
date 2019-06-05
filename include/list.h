@@ -137,7 +137,7 @@ namespace sc{
 
                 ///Comparsion ==
                 bool operator==( const iterator & rhs ) const
-                {return this-> it == rhs.itit;}
+                {return this-> it == rhs.it;}
 
                 ///Comparsion !=
                 bool operator!=( const iterator & rhs ) const
@@ -147,6 +147,13 @@ namespace sc{
                 Node *it;
 
         };
+
+        //iterator op
+        //template <class T>
+        iterator begin()
+        {
+            return iterator(this->m_head->next);
+        }
 
         ///Special Members
 
@@ -255,6 +262,8 @@ namespace sc{
             std::cout << "Construiu 3\n";
             //std::cout << this->m_head;
         }
+
+
 
         
         list( const list& other ):
@@ -499,7 +508,7 @@ namespace sc{
 
             pos.it->prev->next = val;
             val->prev = pos.it->prev;
-            pos.it->prev = target;
+            pos.it->prev = val;
 
             SIZE += 1;
 
@@ -507,7 +516,7 @@ namespace sc{
         }
 
         template< typename InItr >
-        iterator insert( iterator pos, InItr first, InItr last );
+        //iterator insert( iterator pos, InItr first, InItr last );
 
         iterator erase( iterator pos ){
 

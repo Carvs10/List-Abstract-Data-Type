@@ -37,9 +37,12 @@ int main(){
 	lista1.pop_front();
 	std::cout << "Pop_front: " <<lista1.front() << std::endl;//pop_front()
 
+	//ITERATOR
+	std::cout << "\n===============ITERATOR OPERATORS TEST==================\n\n";
 
-
-  
+	sc::list<int>::iterator i; //pop_front()
+	i = lista1.begin();
+  	std::cout << "it" << *i << std::endl;
 
 	return 0;
 }
