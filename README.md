@@ -51,6 +51,6 @@ and there you have it!
 
 ## 5. Authorship
 
-This C++ class was developed by João Victtor Carvalho and Pedro Henrique Alves Cardoso.
+This C++ class was [developed by João Victtor Carvalho](https://github.com/carvs10) and [Pedro Henrique Alves Cardoso](https://github.com/pedrocardoso5).
 
 IMD/UFRN 2019
