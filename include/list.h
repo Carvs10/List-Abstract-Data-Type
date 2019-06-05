@@ -487,13 +487,44 @@ namespace sc{
         /*
         void assign( const T & value );
 
+        */
 
         ///Operator overloading
 
-        bool operator==( const Vector& lhs, const Vector& rhs );
+        bool operator==( const Vector& lhs, const Vector& rhs ){
 
-        bool operator!=( const Vector& lhs, const Vector& rhs );
-        */
+            if( lhs.size() == rhs.size() ){
+
+                for(int i =0; i < size(); i++){
+                    if(lhs->data != rhs->data){
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        }
+
+        bool operator!=( const Vector& lhs, const Vector& rhs ){
+
+            if(lhs.size() == rhs.size() ){
+
+               for(int i -0; i < size(); i++){
+                    if(lhs->data != rhs->data){
+                        return true;
+                    }
+                }
+                
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        
 
         /// Methods with Iterator
 
