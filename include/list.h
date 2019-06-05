@@ -20,7 +20,7 @@ namespace sc{
 
     //! Class list
     /*!
-       Contains the methods
+       In this class we intend to do the Abstract Data Type List, with iterator and const_iterator, as described in the pdf located in the folder "reference", for more details of each method of this class please check the pdf.
     */
 
     class list{
