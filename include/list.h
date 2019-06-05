@@ -1,9 +1,15 @@
+/*!
+ * \ File list.h
+ * \ Implemetation of class Abstract Data Type List
+ * \ Authors João Victtor and Pedro Henrique
+ */
+
 #ifndef LIST_H
 #define LIST_H
 
-#include <iostream> //cout, endl
+#include <iostream> 
 #include <cstdlib> // size_t
-#include <string>
+#include <string> //strings
 #include <initializer_list> //ilist
 #include <exception>
 #include <algorithm> //std::copy
@@ -12,11 +18,17 @@ namespace sc{
 
     template < typename T >
 
+    //! Class list
+    /*!
+       Contains the methods
+    */
+
     class list{
 
         private:
 
-            /** Contains nodes previous/next adresses, and it's data. */
+            //! Struct of a Node
+            /*! Contains nodes previous/next adresses, and it's data. */
             struct Node {
                 T data;
                 Node *prev;
@@ -26,35 +38,42 @@ namespace sc{
             };
 
             std::size_t SIZE;           //!< Total size of the list
-            std::size_t CAPACITY;       //!<
             Node *m_head;               //!< Head node of the list
-            Node *m_tail; 
+            Node *m_tail;               //!< Tail node of the list
 
         public:
 
 
 
         using size_type = unsigned long;
-        ///Classe precia de ajustes, não esta completa;
+
+        //! Class Const Iterator
         class const_iterator{
 
             public:
-                ///Iterator Constructor
+
+                //! Const Iterator Constructor
                 const_iterator( const Node * it = nullptr)
                 {/*empty*/}
 
+                //! Const Iterator Destructor
+                ~const_iterator()
+                {/*empty*/}
 
+                //! Const Iterator oparator
                 const_iterator & operator*( void ) const
                 {
                     return *it;
                 }
 
+                //! Const Iterator oparator
                 const_iterator & operator++( void )
                 {   
                     it= it->next;
                     return this-> it->next;
                 }
 
+                //! Const Iterator oparator
                 const_iterator operator++( int )
                 {
                     const_iterator temp( it );
@@ -63,12 +82,14 @@ namespace sc{
                     return temp;
                 }
 
+                //! Const Iterator oparator
                 const_iterator & operator--( void )
                 {
                     it = it->prev;
                     return this-> it->prev;
                 }
 
+                //! Const Iterator oparator
                 const_iterator operator--( int )
                 {
                     const_iterator temp( it );
@@ -77,19 +98,21 @@ namespace sc{
                     return temp;
                 }
 
+                //! Const Iterator oparator
                 T operator*()
                 {
                     return it->data;
                 }
-                ///Comparsion ==
+                //! Comparsion ==
                 const bool operator==( const const_iterator & rhs ) const
                 {return this-> it == rhs.itit;}
 
-                ///Comparsion !=
+                //! Comparsion !=
                 const bool operator!=( const const_iterator & rhs ) const
                 {return this-> it != rhs.it;}
 
             private:
+                //! The private pointer
                 const Node *it;
                 
         };
@@ -97,26 +120,33 @@ namespace sc{
 
         
 
-        
+        //! Class Iterator
         class iterator{
 
             public:
-                ///Iterator Constructor
+
+                //! Iterator Constructor
                 iterator( Node * it = nullptr)
                 {/*empty*/}
 
+                //! Iterator Destructor
+                ~iterator()
+                {/*empty*/}
 
+                //! Const Iterator oparator
                 iterator & operator*( void ) const
                 {
                     return *it;
                 }
 
+                //! Const Iterator oparator
                 iterator & operator++( void )
                 {   
                     it= it->next;
                     return this-> it->next;
                 }
 
+                //! Const Iterator oparator
                 iterator operator++( int )
                 {
                     iterator temp( it );
@@ -125,12 +155,14 @@ namespace sc{
                     return temp;
                 }
 
+                //! Const Iterator oparator
                 iterator & operator--( void )
                 {
                     it = it->prev;
                     return this-> it->prev;
                 }
 
+                //! Const Iterator oparator
                 iterator operator--( int )
                 {
                     iterator temp( it );
@@ -139,15 +171,16 @@ namespace sc{
                     return temp;
                 }
 
+                //! Const Iterator oparator
                 T operator*()
                 {
                     return it->data;
                 }
-                ///Comparsion ==
+                //! Comparsion ==
                 bool operator==( const iterator & rhs ) const
                 {return this-> it == rhs.it;}
 
-                ///Comparsion !=
+                //! Comparsion !=
                 bool operator!=( const iterator & rhs ) const
                 {return this-> it != rhs.it;}
 
@@ -156,17 +189,37 @@ namespace sc{
 
         };
 
-        //iterator op
-        //template <class T>
+        //! Iterator method
         iterator begin()
         {
             iterator it(this->m_head->next);
             return it;
         }
 
-        ///Special Members
+        //! Iterator method
+        const const_iterator cbegin() const
+        {
+            iterator it(this->m_head->next);
+            return it;
+        }
 
-        ///Default Constructor
+        //! Iterator method
+        iterator end()
+        {
+            iterator it(this->m_tail);
+            return it;
+        }
+
+        //! Iterator method
+        const iterator cend() const
+        {
+            const_iterator it(this->m_tail);
+            return it;
+        }
+
+        //! Special Members
+
+        //! Constructor Default
         list():               
                 SIZE { 0 },              
                 m_head { new Node() },
@@ -177,29 +230,29 @@ namespace sc{
                 this->m_tail->next = nullptr;
                 this->m_head->next = m_tail;
                 this->m_tail->prev = m_head;
-                std::cout << "Construiu 1\n";
+                //std::cout << "Construiu 1\n";
                 
                 if(this->m_head->next == m_tail){
-                    //std::cout<< "deu certo\n";
+                    
                 }
         }
 
-        ///Destructor
+        //! Destructor
         ~list()
         {
             Node *aux = this->m_head->next;
-            while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
+            while( aux != this->m_tail ){
                 aux = aux->next;
                 delete aux->prev;
 
             }
             
-            delete this->m_head;//vai deletar o nodes finais de head e tail
+            delete this->m_head;
             delete this->m_tail;
-            std::cout << "Destruiu\n";
+            //std::cout << "Destruiu\n";
         }
 
-        /// Construct the list with count default-inserted instances of T
+        //! Construct the list with count default-inserted instances of T
         explicit list( size_type count ):
                 SIZE{ count },
                 m_head { new Node() },
@@ -225,10 +278,12 @@ namespace sc{
                 
             }
             
-            std::cout << "Construiu 2\n";
+            //std::cout << "Construiu 2\n";
         }
 
         template < typename InputIt >
+
+        //! Contructor that recives a range: first and last
         list( InputIt first, InputIt last ):
             SIZE{ (size_type)(last - first)},
             m_head { new Node() },
@@ -257,24 +312,19 @@ namespace sc{
                 
 
                 first++;
-                //std::cout << new_n->data <<std::endl;
-               // std::cout << new_n->prev->data <<std::endl;
+                
             }
             Node * aux2 = this->m_head;
             for( size_type i = 0; i < SIZE; i++){
 
                 aux2 = aux2->next;
-                //std::cout  <<std::endl;
-                //std::cout << aux2->prev->data <<std::endl;
+                
             }
 
-            std::cout << "Construiu 3\n";
-            //std::cout << this->m_head;
+            //std::cout << "Construiu 3\n";
         }
 
-
-
-        
+        //! Contructor of a list with another list
         list( const list& other ):
             SIZE{ other.SIZE },
             m_head { new Node() },
@@ -289,32 +339,27 @@ namespace sc{
             Node * aux = this->m_head;
             Node * aux2 = other.m_head;
 
-            //std::cout << aux2->data <<"\n\n";
-            //aux2 = aux2->next;
-            //std::cout << aux2->data <<"\n\n";
-
-            //std::cout << "\n"<<m_head->next<<"\n";
+           
             for(size_type i = 0; i < SIZE; i++ ){
 
-                //std::cout << aux2->data <<"\n\n";
-
                 Node *new_n = new Node();
-                //std::cout << "Construiu 42\n";
-                aux2 = aux2->next;//ponteiro percorrendo
-                //std::cout << aux2->data <<"\n\n";
+
+                aux2 = aux2->next;
+
                 aux->next = new_n;
                 new_n->prev = aux;
                 new_n->next = m_tail;
                 this->m_tail->prev = new_n;
-                //std::cout << "Construiu 41\n";
-                new_n->data = aux2->data;//atribuindo os valores
-                aux = aux->next;//avançando para o proximo nó
+ 
+                new_n->data = aux2->data;
+                aux = aux->next;
             }
 
-            std::cout << "Construiu 4\n";
+            //std::cout << "Construiu 4\n";
 
         }
         
+        //! Constructor with a inicialization list (not tested !)
         list ( std::initializer_list<T> ilist):
             SIZE{ ilist.size() },
             m_head { new Node() },
@@ -341,43 +386,42 @@ namespace sc{
                 new_n->data = (*ilist.begin() + i); 
             }
 
-            std::cout <<"Construiu 5\n";
+            //std::cout <<"Construiu 5\n";
 
         }
+        //not done!
         /*
         list& operator=( const list& other ):
             SIZE{ other.SIZE },
             CAPACITY{ other.CAPACITY }
-        {
-            
+        {           
         }
-
-        
         list& operator=( std::initializer_list<T> ilist);
         */
 
-        ///Operators
+        //! Operators (class methods)
 
+        //! Size operator
         size_type size() const
         {
             return SIZE;
         }
 
+        //! Clear operator
         void clear(){
             
-            //Lista Vazia;
             if( m_head->next == m_tail) return;
 
             else{
                 Node *aux = this->m_head->next;
-                while( aux != this->m_tail ){//vai percorrer os nodes e deletar um por um
+                while( aux != this->m_tail ){
                     aux = aux->next;
                     delete aux->prev;
                 }
             }
         };
 
-        
+        //! Empty operator
         bool empty(){
             
             if( m_head->next == m_tail ){
@@ -388,6 +432,7 @@ namespace sc{
             } 
         }
         
+        //! Push front operator
         void push_front( const T & value )
         {
             SIZE = SIZE + 1;
@@ -418,14 +463,14 @@ namespace sc{
 
         }
 
-        
+        //! Push back operator
         void push_back( const T & value )
         {   
             SIZE = SIZE + 1;
-            //Lista vazia;
+
             Node * val = new Node();
             if( m_tail->prev == m_head ){
-                //Node * val = new Node();
+ 
                 val->prev = m_head;
                 m_head->next = val;
                 val->next = m_tail;
@@ -434,7 +479,6 @@ namespace sc{
             }
             else{
                 Node * aux = m_tail->prev;
-                //Node * val = new Node();
 
                 val->prev = aux;
                 aux->next = val;
@@ -447,6 +491,7 @@ namespace sc{
             val->data = value;
         }
         
+        //! Pop back operator
         void pop_back()
         {
             SIZE = SIZE - 1;
@@ -464,6 +509,7 @@ namespace sc{
 
         }
         
+        //! Pop front operator
         void pop_front()
         {
             SIZE = SIZE - 1;
@@ -479,6 +525,7 @@ namespace sc{
 
         }
         
+        //! Back operator
         const T & back() const 
         {
             Node * aux = this->m_tail->prev;
@@ -486,6 +533,7 @@ namespace sc{
 
         }
 
+        //! Front operator
         const T & front() const 
         {
             Node * aux = this->m_head->next;
@@ -493,13 +541,15 @@ namespace sc{
 
         }
 
+        //not done!
         /*
         void assign( const T & value );
 
         */
 
-        ///Operator overloading
+        //! Operator overloading
 
+        //! Equal overloading operator
         friend bool operator==( const list& lhs, const list& rhs ){
 
             
@@ -527,6 +577,7 @@ namespace sc{
 
         }
 
+        //! Note equal overloading operator
         friend bool operator!=( const list& lhs, const list& rhs ){
 
             if(lhs.size() == rhs.size() ){
@@ -552,8 +603,9 @@ namespace sc{
         }
         
 
-        /// Methods with Iterator
+        //! Methods with Iterator (not tested)
 
+        //! Incert method (not tested)
         iterator insert( iterator pos, const T & value){
             iterator returner = pos;
 
@@ -573,8 +625,11 @@ namespace sc{
         }
 
         template< typename InItr >
-        //iterator insert( iterator pos, InItr first, InItr last );
 
+        // not done
+        // terator insert( iterator pos, InItr first, InItr last );
+
+        //! Erase method (not tested)
         iterator erase( iterator pos ){
 
             iterator returner = pos.it->next;
@@ -588,9 +643,6 @@ namespace sc{
 
             return returner;
         }
-
-
-
     };
 }
 
