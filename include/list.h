@@ -484,15 +484,32 @@ namespace sc{
         bool operator==( const Vector& lhs, const Vector& rhs );
 
         bool operator!=( const Vector& lhs, const Vector& rhs );
+        */
 
         /// Methods with Iterator
 
-        iterator insert( iterator pos, const T & value);
+        iterator insert( iterator pos, const T & value){
+            iterator returner = pos;
+
+            returner--;
+
+            Node * val = new Node();
+            val->data = value;
+            val->next = pos.it;
+
+            pos.it->prev->next = val;
+            val->prev = pos.it->prev;
+            pos.it->prev = target;
+
+            SIZE += 1;
+
+            return returner;
+        }
 
         template< typename InItr >
         iterator insert( iterator pos, InItr first, InItr last );
 
-        */
+        
 
 
 
