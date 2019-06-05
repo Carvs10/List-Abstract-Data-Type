@@ -37,12 +37,20 @@ int main(){
 	lista1.pop_front();
 	std::cout << "Pop_front: " <<lista1.front() << std::endl;//pop_front()
 
+	//lista1.pop_front();
+
+	bool f = lista1==lista2;
+	std::cout << "bool lista1 == lista2: " << f << std::endl;//oparator ==()
+
+	bool a = lista1!=lista2;
+	std::cout << "bool lista1 != lista2: " << a << std::endl;//oparator ==()
+
 	//ITERATOR
-	std::cout << "\n===============ITERATOR OPERATORS TEST==================\n\n";
+	//std::cout << "\n===============ITERATOR OPERATORS TEST==================\n\n";
 
 	sc::list<int>::iterator i; //pop_front()
 	i = lista1.begin();
-  	std::cout << "it" << *i << std::endl;
+  	//std::cout << "it" << *i << std::endl;
 
 	return 0;
 }

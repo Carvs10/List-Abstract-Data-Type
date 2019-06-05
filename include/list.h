@@ -77,6 +77,10 @@ namespace sc{
                     return temp;
                 }
 
+                T operator*()
+                {
+                    return it->data;
+                }
                 ///Comparsion ==
                 const bool operator==( const const_iterator & rhs ) const
                 {return this-> it == rhs.itit;}
@@ -135,6 +139,10 @@ namespace sc{
                     return temp;
                 }
 
+                T operator*()
+                {
+                    return it->data;
+                }
                 ///Comparsion ==
                 bool operator==( const iterator & rhs ) const
                 {return this-> it == rhs.it;}
@@ -152,7 +160,8 @@ namespace sc{
         //template <class T>
         iterator begin()
         {
-            return iterator(this->m_head->next);
+            iterator it(this->m_head->next);
+            return it;
         }
 
         ///Special Members
@@ -491,12 +500,22 @@ namespace sc{
 
         ///Operator overloading
 
-        bool operator==( const Vector& lhs, const Vector& rhs ){
+        friend bool operator==( const list& lhs, const list& rhs ){
 
+            
             if( lhs.size() == rhs.size() ){
 
-                for(int i =0; i < size(); i++){
-                    if(lhs->data != rhs->data){
+                Node * aux = lhs.m_head;
+                Node * aux2 = rhs.m_head;
+
+                for(int i =0; i < rhs.size(); i++){
+
+                    aux = aux->next;
+                    aux2 = aux2->next;
+
+                    if(aux->data != aux2->data){
+
+
                         return false;
                     }
                 }
@@ -508,12 +527,19 @@ namespace sc{
 
         }
 
-        bool operator!=( const Vector& lhs, const Vector& rhs ){
+        friend bool operator!=( const list& lhs, const list& rhs ){
 
             if(lhs.size() == rhs.size() ){
 
-               for(int i -0; i < size(); i++){
-                    if(lhs->data != rhs->data){
+                Node * aux = lhs.m_head;
+                Node * aux2 = rhs.m_head;
+
+               for(size_type i = 0; i < rhs.size(); i++){
+
+                    aux = aux->next;
+                    aux2 = aux2->next;
+
+                    if(aux->data != aux2->data){
                         return true;
                     }
                 }
@@ -558,7 +584,7 @@ namespace sc{
 
             delete pos.it;
 
-            SIZE-= 1;
+            SIZE -= 1;
 
             return returner;
         }
