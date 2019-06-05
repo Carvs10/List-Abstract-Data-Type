@@ -18,14 +18,24 @@ int main(){
 
 
 	//OPARATORS
-	std::cout << lista1.back() << std::endl;//back()
-	std::cout << lista1.front() << std::endl;//front()
+	std::cout << "\n===============OPARATORS TEST==================\n\n";
+
+	std::cout << "Size: " <<lista1.size() << std::endl;//size()
+
+	std::cout << "Back: " <<lista1.back() << std::endl;//back()
+	std::cout << "Front: " <<lista1.front() << std::endl;//front()
 
 	lista1.push_back(6);
-	std::cout << lista1.back() << std::endl;//push_back()
+	std::cout << "Push_back: " <<lista1.back() << std::endl;//push_back()
 
 	lista1.push_front(7);
-	std::cout <<lista1.front() << std::endl;//push_front()
+	std::cout << "Push_front: " <<lista1.front() << std::endl;//push_front()
+
+	lista1.pop_back();
+	std::cout << "Pop_back: " <<lista1.back() << std::endl;//pop_back()
+
+	lista1.pop_front();
+	std::cout << "Pop_front: " <<lista1.front() << std::endl;//pop_front()
 
 
 

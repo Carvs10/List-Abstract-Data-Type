@@ -439,8 +439,8 @@ namespace sc{
                 Node * aux = this->m_tail->prev;
 
                 aux = aux->prev;
-
-
+                aux->next = this->m_tail;
+                this->m_tail->prev = aux;
 
             }
 
@@ -448,10 +448,15 @@ namespace sc{
         
         void pop_front()
         {
+            SIZE = SIZE - 1;
             if(m_head->next == m_tail) return;
 
             else{
-                
+                Node * aux = this->m_head->next;
+
+                aux = aux->next;
+                aux->prev = this->m_head;
+                this->m_head->next = aux;
             }
 
         }
